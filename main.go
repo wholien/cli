@@ -1,15 +1,23 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 )
 
 func main() {
-	var port int
-	flag.IntVar(&port, "p", 8000, "specify port to use. defaults to 8000")
-	flag.Parse()
-	
-	fmt.Printf("port = %d\n", port)
-	fmt.Printf("other args: %+v\n", flag.Args())
+	var guessColor string
+	const favColor = "blue"
+	for {
+		fmt.Println("Guess my favorite color:")
+		if _, err := fmt.Scanf("%s", &guessColor); err != nil {
+			fmt.Printf("%s\n", err)
+			return
+		}
+		if favColor == guessColor {
+			fmt.Printf("%q is my favorite color!\n", favColor)
+			return
+		}
+		fmt.Printf("Sorry, %q is not my favorite color. Guess again\n", guessColor)
+	}
 }
+
