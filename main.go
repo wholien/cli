@@ -1,20 +1,15 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
 )
 
 func main() {
-	// Program Name is always the first (implicit argument)
-	cmd := os.Args[0]
-
-	fmt.Printf("Program Name: %s\n", cmd)
-
-	argCount := len(os.Args[1:])
-	fmt.Printf("Total Arguments (excluding program name): %d\n", argCount)
-
-	for i, a := range os.Args[1:] {
-		fmt.Printf("Argument %d is %s\n", i+1, a)
-	}
+	var port int
+	flag.IntVar(&port, "p", 8000, "specify port to use. defaults to 8000")
+	flag.Parse()
+	
+	fmt.Printf("port = %d\n", port)
+	fmt.Printf("other args: %+v\n", flag.Args())
 }
